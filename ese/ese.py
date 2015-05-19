@@ -116,7 +116,9 @@ def main():
     log.info("[dest_worker] Total processed %s" % DEST_COUNTER.value)
     if args.dest_alias is not None and len(args.dest_alias) > 0:
         # we remove all existing mappings to this alias, then add it to the current dest_index
-        dest_es_ic.delete_alias(name=args.dest_alias)
+        for idx_name, aliases_mapping in dest_es_ic.get_aliases().iteritems():
+            if args.dest_alias in aliases_mapping.get("aliases", {})
+                dest_es_ic.delete_alias(index=idx_name, name=args.dest_alias)
         dest_es_ic.put_alias(index=args.dest_index, name=args.dest_alias)
 
 
