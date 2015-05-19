@@ -5,6 +5,7 @@ from multiprocessing import Process, Queue, Value
 from uuid import uuid4
 from time import sleep
 import traceback
+from datetime import datetime
 
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from elasticsearch.client import IndicesClient
@@ -82,6 +83,7 @@ def main():
     if args.dest_index is None or len(args.dest_index) == 0:
         raise Exception("--dest-index must be specified!")
 
+    dt_start = datetime.now()
     # copy mapping
     src_es_instance = get_elasticsearch(args.src_host, args.src_port)
     dest_es_instance = get_elasticsearch(args.dest_host, args.dest_port)
@@ -121,6 +123,8 @@ def main():
                 dest_es_ic.delete_alias(index=idx_name, name=args.dest_alias)
         dest_es_ic.put_alias(index=args.dest_index, name=args.dest_alias)
     dest_es_ic.refresh(args.dest_index)
+    dt_end = datetime.now()
+    log.info("Time elapsed: %s" % (dt_end-dt_start, ))
 
 if __name__ == "__main__":
     main()
