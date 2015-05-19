@@ -120,7 +120,7 @@ def main():
             if args.dest_alias in aliases_mapping.get("aliases", {}):
                 dest_es_ic.delete_alias(index=idx_name, name=args.dest_alias)
         dest_es_ic.put_alias(index=args.dest_index, name=args.dest_alias)
-
+    dest_es_ic.refresh(args.dest_index)
 
 if __name__ == "__main__":
     main()
