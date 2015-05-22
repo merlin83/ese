@@ -1,4 +1,4 @@
-ESE is an Elasticsearch exporter inspired by Elasticsearch-Exporter [https://github.com/mallocator/Elasticsearch-Exporter] and elasticsearch-dump [https://github.com/taskrabbit/elasticsearch-dump]
+ESE is an Elasticsearch exporter inspired by [Elasticsearch-Exporter](https://github.com/mallocator/Elasticsearch-Exporter) and [elasticsearch-dump](https://github.com/taskrabbit/elasticsearch-dump).
 
 This script retrieves from the Elasticsearch scroll API to retrieve from the source and multiprocessing to index at the destination server. It uses RequestsHttpConnection for gzip compression.
 
