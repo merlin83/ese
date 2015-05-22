@@ -7,7 +7,7 @@ install_requires = [
 
 setup(
     name="ese",
-    version="0.1",
+    version="0.2",
     description="Tool to export Elasticsearch index from one cluster to another cluster",
     url="https://github.com/merlin83/ese",
     author="Khee Chin",
