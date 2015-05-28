@@ -28,7 +28,7 @@ def src_worker(args, dest_queue, MAGIC_STRING):
     else:
         use_query = args.query
     try:
-        scroll = scan(src_es_instance, query=use_query, index=args.src_index, scroll='60m', size=args.src_batch_size)
+        scroll = scan(src_es_instance, query=use_query, index=args.src_index, scroll=args.src_scroll_interval, size=args.src_batch_size)
         for i, res in enumerate(scroll):
             # if i == 0: log.info(res)
             if i % 10000 == 0:
@@ -64,6 +64,7 @@ def main():
     parser.add_argument("--src-port", action="store", default=9200, help="Source port [default: %(default)s]")
     parser.add_argument("--src-index", action="store", default="", type=unicode, help="Source index")
     parser.add_argument("--src-batch-size", action="store", type=int, default=5000, help="Source query batchsize [default: %(default)s]")
+    parser.add_argument("--src-scroll-interval", action="store", type=unicode, default="60m", help="Interval for source scroll query [default: %(default)s]")
 
     parser.add_argument("--dest-host", action="store", default="127.0.0.1", type=unicode, help="Destination host [default: %(default)s]")
     parser.add_argument("--dest-port", action="store", default=9200, help="Destination port [default: %(default)s]")
