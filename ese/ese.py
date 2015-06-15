@@ -28,6 +28,10 @@ def src_worker(args, dest_queue, MAGIC_STRING):
     else:
         use_query = args.query
     try:
+        # send an initial query to get the size of resultset
+        count_rs = src_es_instance.search(index=args.src_index, body=use_query size=0)
+        total_hits = count_rs.get("hits", {}).get("total", None)
+        log.info("[src_worker] Total results matching query: %s" % total_hits)
         scroll = scan(src_es_instance, query=use_query, index=args.src_index, scroll=args.src_scroll_interval, size=args.src_batch_size)
         for i, res in enumerate(scroll):
             # if i == 0: log.info(res)
