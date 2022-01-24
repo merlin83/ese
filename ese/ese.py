@@ -64,21 +64,21 @@ def dest_worker(args, dest_queue, MAGIC_STRING, DEST_COUNTER):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--src-host", action="store", default="127.0.0.1", type=unicode, help="Source host [default: %(default)s]")
+    parser.add_argument("--src-host", action="store", default="127.0.0.1", type=str, help="Source host [default: %(default)s]")
     parser.add_argument("--src-port", action="store", default=9200, help="Source port [default: %(default)s]")
-    parser.add_argument("--src-index", action="store", default="", type=unicode, help="Source index")
+    parser.add_argument("--src-index", action="store", default="", type=str, help="Source index")
     parser.add_argument("--src-batch-size", action="store", type=int, default=5000, help="Source query batchsize [default: %(default)s]")
-    parser.add_argument("--src-scroll-interval", action="store", type=unicode, default="60m", help="Interval for source scroll query [default: %(default)s]")
+    parser.add_argument("--src-scroll-interval", action="store", type=str, default="60m", help="Interval for source scroll query [default: %(default)s]")
 
-    parser.add_argument("--dest-host", action="store", default="127.0.0.1", type=unicode, help="Destination host [default: %(default)s]")
+    parser.add_argument("--dest-host", action="store", default="127.0.0.1", type=str, help="Destination host [default: %(default)s]")
     parser.add_argument("--dest-port", action="store", default=9200, help="Destination port [default: %(default)s]")
-    parser.add_argument("--dest-index", action="store", default="", type=unicode, help="Destination index")
+    parser.add_argument("--dest-index", action="store", default="", type=str, help="Destination index")
     parser.add_argument("--dest-batch-size", action="store", type=int, default=5000, help="Destination batchsize [default: %(default)s]")
     parser.add_argument("--dest-alias", action="store", help="Destination index alias (to be set after we have finished populating)")
     parser.add_argument("--dest-concurrency", action="store", type=int, default=4, help="Destination batchsize [default: %(default)s]")
     parser.add_argument("--dest-delete-index", action="store_true", help="Delete destination index at before starting")
 
-    parser.add_argument("--query", action="store", type=unicode, default="", help="Query to use [if None is specified, a match_all will be used]")
+    parser.add_argument("--query", action="store", type=str, default="", help="Query to use [if None is specified, a match_all will be used]")
 
     args = parser.parse_args()
 
